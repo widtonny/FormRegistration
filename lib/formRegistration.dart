@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/SecondRoute.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class formRegistration extends StatefulWidget {
@@ -12,6 +13,8 @@ class _formRegistrationState extends State<formRegistration> {
   TextEditingController ctrUsername = new TextEditingController();
   TextEditingController ctrPassword = new TextEditingController();
   int id = 1;
+  String myphone = "-";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +24,7 @@ class _formRegistrationState extends State<formRegistration> {
         body: Container(
             margin: EdgeInsets.all(10),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 10,
@@ -73,19 +77,25 @@ class _formRegistrationState extends State<formRegistration> {
                     Text("perempuan"),
                   ],
                 ),
-                Container(
-                  width: 200,
-                  height: 45,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 33, 177, 230)),
-                    onPressed: () {},
-                    child: Text(
-                      "SUBMIT",
-                      style: TextStyle(
-                        color: Color(0xffffffff),
-                      ),
-                    ),
+                Text("phone : " + myphone),
+                ElevatedButton(
+                    onPressed: () async {
+                      final result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SecondRoute()),
+                      );
+                      print("hasil input phone number : " + result.toString());
+                      setState(() {
+                        myphone = result.toString();
+                      });
+                    },
+                    child: Text("Phone Number")),
+                Center(
+                  child: Container(
+                    width: 128,
+                    child:
+                        ElevatedButton(onPressed: () {}, child: Text("submit")),
                   ),
                 ),
               ],
